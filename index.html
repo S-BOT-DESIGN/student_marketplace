@@ -1,1 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Marketplace</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f2f2f2; margin:0; padding:0; }
+  header { background-color: #4CAF50; color: white; text-align: center; padding: 25px 0; font-size: 28px; }
+  .filters { text-align:center; margin:20px 0; }
+  .filters select, .filters input { padding:10px; margin:5px; font-size:16px; border-radius:5px; border:1px solid #ccc; }
+  .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:20px; padding:20px; max-width:1200px; margin:auto; }
+  .item-card { background:white; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.2); padding:15px; text-align:center; transition: transform 0.2s, box-shadow 0.2s; position:relative; }
+  .item-card:hover { transform: translateY(-5px); box-shadow:0 5px 15px rgba(0,0,0,0.3); }
+  .item-img { width:100%; height:150px; object-fit:cover; border-radius:8px; }
+  .badge { position:absolute; top:10px; left:10px; background:red; color:white; padding:5px 8px; border-radius:5px; font-size:12px; font-weight:bold; }
+  .item-name { font-size:20px; font-weight:bold; margin:10px 0; }
+  .item-condition, .item-price { font-size:16px; margin:5px 0; }
+  .contact-btn { display:inline-block; margin-top:10px; padding:10px 15px; background-color:#25D366; color:white; text-decoration:none; border-radius:5px; font-weight:bold; cursor:not-allowed; opacity:0.7; }
+  footer { text-align:center; padding:15px; background:#ddd; margin-top:20px; }
+</style>
+</head>
+<body>
 
+<header>Student Second-Hand Marketplace</header>
+
+<div class="filters">
+  <input type="text" id="searchInput" placeholder="Search items by name..." onkeyup="filterItems()">
+  <select id="categoryFilter" onchange="filterItems()">
+    <option value="all">All Categories</option>
+    <option value="books">Books</option>
+    <option value="stationery">Stationery</option>
+    <option value="lab">Lab Items</option>
+    <option value="electronics">Electronics</option>
+  </select>
+</div>
+
+<section class="container" id="itemsContainer">
+  <!-- Item 1: Physics Textbook -->
+  <div class="item-card" data-category="books">
+    <div class="badge">New</div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Physics_textbook.jpg/250px-Physics_textbook.jpg" alt="Physics Textbook" class="item-img">
+    <div class="item-name">Physics Textbook</div>
+    <div class="item-condition">Condition: Good</div>
+    <div class="item-price">Price: ₹150</div>
+    <a href="#" class="contact-btn" title="Contact Seller (coming soon)">Contact Seller</a>
+  </div>
+
+  <!-- Item 2: Lab Coat -->
+  <div class="item-card" data-category="lab">
+    <div class="badge">Hot</div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Lab_coat.jpg/250px-Lab_coat.jpg" alt="Lab Coat" class="item-img">
+    <div class="item-name">Lab Coat</div>
+    <div class="item-condition">Condition: Like New</div>
+    <div class="item-price">Price: ₹250</div>
+    <a href="#" class="contact-btn" title="Contact Seller (coming soon)">Contact Seller</a>
+  </div>
+
+  <!-- Item 3: Used Calculator -->
+  <div class="item-card" data-category="electronics">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/TI-84_plus.jpg/250px-TI-84_plus.jpg" alt="Used Calculator" class="item-img">
+    <div class="item-name">Used Calculator</div>
+    <div class="item-condition">Condition: Excellent</div>
+    <div class="item-price">Price: ₹200</div>
+    <a href="#" class="contact-btn" title="Contact Seller (coming soon)">Contact Seller</a>
+  </div>
+</section>
+
+<footer>&copy; 2025 Student Marketplace Project</footer>
+
+<script>
+function filterItems() {
+  const searchValue = document.getElementById('searchInput').value.toLowerCase();
+  const categoryValue = document.getElementById('categoryFilter').value;
+  const items = document.querySelectorAll('.item-card');
+
+  items.forEach(item => {
+    const name = item.querySelector('.item-name').textContent.toLowerCase();
+    const category = item.getAttribute('data-category');
+    if(name.includes(searchValue) && (categoryValue==='all' || categoryValue===category)) {
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+</script>
+
+</body>
+</html>
